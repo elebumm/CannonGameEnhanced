@@ -87,7 +87,13 @@ public class CannonView extends SurfaceView
    private Paint blockerPaint; // Paint used to draw the blocker
    private Paint targetPaint; // Paint used to draw the target
    private Paint backgroundPaint; // Paint used to clear the drawing area
-
+   private int levels = 1;
+   private int pieces = 1;
+   private int score = 0;
+   private int[] highscores = new int[5];
+   
+   
+   
    // public constructor
    public CannonView(Context context, AttributeSet attrs)
    {
@@ -127,6 +133,13 @@ public class CannonView extends SurfaceView
       backgroundPaint = new Paint(); 
    } // end CannonView constructor
 
+   
+   public void addLevel() {
+	   levels++;
+	   pieces = levels;
+	   hitStates = new boolean[pieces];
+	   initialBlockerVelocity += 50;
+   }
    // called by surfaceChanged when the size of the SurfaceView changes,
    // such as when it's first added to the View hierarchy
    @Override
@@ -492,6 +505,14 @@ public class CannonView extends SurfaceView
    } 
 
    // called when the surface is destroyed
+   
+   private void highScores(int currentScore){
+	   
+	   for (int i = 0; i < 5; i++){
+		   highscores = ("highscore " + i );
+	   }
+   }
+   
    @Override
    public void surfaceDestroyed(SurfaceHolder holder)
    {
